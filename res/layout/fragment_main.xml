@@ -9,8 +9,32 @@
     tools:context="edu.vanderbilt.isis.demo.MainActivity$PlaceholderFragment" >
 
     <TextView
+        android:id="@+id/tempLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="27dp"
+        android:text="@string/tempLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tempLabel"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="117dp"
+        android:text="@string/tempLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/updateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tempLabel"
+        android:layout_below="@+id/tempLabel"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="79dp"
+        android:text="@string/updateButton" />
 
 </RelativeLayout>
