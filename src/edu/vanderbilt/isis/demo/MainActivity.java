@@ -1,7 +1,9 @@
 package edu.vanderbilt.isis.demo;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,14 +11,64 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphView.GraphViewData;
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.LineGraphView;
 
 public class MainActivity extends Activity {
+	TextView temp;
+	GraphView graph;
+	
+	public void updateMeasurements(View view){
+		TextView tempLabel;
+		tempLabel = (TextView) findViewById(R.id.tempLabel);
+		tempLabel.setText("Button has been pressed");
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask(){
+			@Override
+			public void run(){
+				MainActivity.this.runOnUiThread(new Runnable(){
+					@Override
+					public void run(){
+						updateTemp();
+					}
+				});
+			}
+		}, 0, 1000);
+	}
+	
+	public void updateTemp(){
+		//Update the temp
+		temp = (TextView) findViewById(R.id.temp);
+		temp.setText("" + (Math.random()*100));
+	}
+
+	public void updateGraph(){
+		//graph.
+	}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        //Initialize Graph
+        graph = new LineGraphView(this, "Electrocardiogram");
+        GraphViewSeries series = new GraphViewSeries(new GraphViewData[] {
+        		new GraphViewData(1, 2.0d)
+        		, new GraphViewData(2, 1.5d)
+        		, new GraphViewData(3, 2.5d)
+        		, new GraphViewData(4, 1.0d)
+        });
+        graph.addSeries(series);
+        
+        //Add to Layout
+        //LinearLayout layout = (LinearLayout)findViewById(R.id.graph1);
+        //layout.addView(graph);
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
